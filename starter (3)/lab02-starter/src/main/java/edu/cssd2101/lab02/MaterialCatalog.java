@@ -81,7 +81,27 @@ public interface MaterialCatalog {
      */
     default List<Material> recent(int asOfYear, int years) {
         // TODO T3: implement the documented extension contract.
-        throw new UnsupportedOperationException("T3 is an exercise");
+        if (asOfYear < 1450 || asOfYear > 9999) {
+        throw new IllegalArgumentException("invalid year");
+    }
+
+    if (years < 1 || years > 10000) {
+        throw new IllegalArgumentException("invalid year count");
+    }
+
+    int firstYear = asOfYear - years + 1;
+
+    List<Material> result = new java.util.ArrayList<>();
+
+    for (Material material : all()) {
+        int year = material.data().year();
+
+        if (year >= firstYear && year <= asOfYear) {
+            result.add(material);
+        }
+    }
+
+    return List.copyOf(result);
     }
 
     /**
@@ -94,6 +114,35 @@ public interface MaterialCatalog {
      */
     default List<Material> byCreators(String... creators) {
         // TODO T3: implement the documented extension contract.
-        throw new UnsupportedOperationException("T3 is an exercise");
+         java.util.Objects.requireNonNull(creators);
+
+    java.util.Set<String> names = new java.util.HashSet<>();
+
+    for (String creator : creators) {
+        java.util.Objects.requireNonNull(creator);
+
+        String name = creator.strip()
+                .toLowerCase(java.util.Locale.ROOT);
+
+        if (name.isBlank()) {
+            throw new IllegalArgumentException();
+        }
+
+        names.add(name);
+    }
+
+    List<Material> result = new java.util.ArrayList<>();
+
+    for (Material material : all()) {
+        String creator = material.data().creator()
+                .strip()
+                .toLowerCase(java.util.Locale.ROOT);
+
+        if (names.contains(creator)) {
+            result.add(material);
+        }
+    }
+
+    return List.copyOf(result);
     }
 }
