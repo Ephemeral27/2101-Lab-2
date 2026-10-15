@@ -75,7 +75,8 @@ public final class EBook extends Material implements Media {
      */
     public int readingTimeMinutes() {
         // TODO T2: implement the documented extension contract.
-        throw new UnsupportedOperationException("T2 is an exercise");
+        //throw new UnsupportedOperationException("T2 is an exercise");
+        return (int)((wordCount +249L)/250L);
     }
 
     /** {@inheritDoc} */
@@ -93,7 +94,8 @@ public final class EBook extends Material implements Media {
     @Override
     protected int intrinsicBasisPoints(int asOfYear) {
         // TODO T2: implement the documented extension contract.
-        throw new UnsupportedOperationException("T2 is an exercise");
+       // throw new UnsupportedOperationException("T2 is an exercise");
+        return drmEnabled ? 0:1500;
     }
 
     /** {@inheritDoc} */
