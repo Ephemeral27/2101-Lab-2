@@ -12,11 +12,14 @@ public final class ShippingVisitor implements MaterialVisitor<Long> {
     /** Creates a reusable stateless operation. */
     public ShippingVisitor() {}
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc}
+     *  DOM'S CODE:
+     *  */
     @Override
     public Long visit(PrintedBook material) {
         // TODO T4: implement the documented extension contract.
-        throw new UnsupportedOperationException("T4 is an exercise");
+    	Objects.requireNonNull(material);
+        return 50L * ((material.weightGrams() + 99L) / 100L);
     }
 
     /** {@inheritDoc} */
@@ -32,11 +35,14 @@ public final class ShippingVisitor implements MaterialVisitor<Long> {
         return Objects.requireNonNull(material).delivery() == Delivery.PHYSICAL ? 50L : 0L;
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc} 
+     * DOM'S CODE:
+     * */
     @Override
     public Long visit(VideoMaterial material) {
         // TODO T4: implement the documented extension contract.
-        throw new UnsupportedOperationException("T4 is an exercise");
+    	Objects.requireNonNull(material);
+        return material.delivery() == Delivery.PHYSICAL ? 100L : 0L;
     }
 
     /** {@inheritDoc} */
